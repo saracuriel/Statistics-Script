@@ -1,0 +1,97 @@
+---
+title: "script statistics"
+author: "Sara Curiel"
+date: "2024-05-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+
+# Introduce the information to build data frames for the main parameters
+library(ggplot2)
+methods <- c("Galaxy full, default", "Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default", "Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","MetaAI", "COSMIC2")
+RMSD <- c(1.09,1.07,1.09,1.09,1.06,1.11,1.09,1.06,1.08,1.05,1.07,1.06,1.05,1.07,1.06,1.08,1.07,1.07,1.08,1.04,1.09,1.08,1.03,1.10,1.12,0.82,1.05)
+commoncontacts <- c(0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1)
+LGA <- c(68.56,65.60,68.09,68.31,68.24,68.19,68.03,67.36,68.10,67.59,68.40,65.70,64.73,68.46,67.75,68.23,65.70,68.48,67.75,67.75,68.91,68.66,69.09,68.50,68.92,22.58,69.23)
+GDT <- c(60.43,59.44,59.65,60.04,59.84,60.03,59.65,59.45,59.84,59.25,59.84,59.45,59.65,60.43,59.45,59.65,59.25,60.24,59.84,59.45,60.04,60.24,60.63,59.84,60.43,20.87,61.81)
+
+DataRMSD <- data.frame(Method = methods, Values = RMSD)
+Datacommoncontacts <- data.frame(Method = methods, Values = commoncontacts)
+DataLGA <- data.frame(Method = methods, Values = LGA)
+DataGDT <- data.frame(Method = methods, Values = GDT)
+
+# Create the box plots for every metric
+ggplot(data = DataRMSD, aes(x = Method, y = Values, fill = Method)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))
+
+ggplot(data = Datacommoncontacts, aes(x = Method, y = Values, fill = Method)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))  
+
+ggplot(data = DataLGA, aes(x = Method, y = Values, fill = Method)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))  
+
+ggplot(data = DataGDT, aes(x = Method, y = Values, fill = Method)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))  
+```
+
+```{r}
+methods <- c("Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default", "Galaxy full, default","Galaxy full, default","Galaxy full, default","Galaxy full, default", "Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy full, ptm","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, default","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","Galaxy reduced, ptm","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","ColabFold","MetaAI","MetaAI","MetaAI", "COSMIC2","COSMIC2","COSMIC2")
+LCS <- c(100,100,100,100,100,100,86.39,100,100,100,17.52,16.99,17.52,17.50,17.26,100,100,100,100,100,100,97.87,86.48,97.87,96.32,17.48,17.24,17.02,17.29,17.63,100,100,100,100,100,98.88,86.39,82.72,100,95.76,17.67,17.07,17.38,17.64,17.08,100,100,100,100,100,98.88,86.39,98.88,95.76,95.76,17.63,17.02,18.02,17.30,17.08,100,100,100,100,100,100,100,100,100,100,17.79,18.12,20.11,18.26,17.66,100,90.91,55.46,100,100,25.35)
+
+DataLCS <- data.frame(Method = methods, Values = LCS)
+
+# Create the box plot for LCS metric
+ggplot(data = DataLCS, aes(x = Method, y = Values, fill = Method)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1))  # Rotar las etiquetas del eje x
+
+```
+
+
+```{r}
+
+#Pre-hoc tests and Kruskal-Wallis. Change the data frame to the one that needs to be analysed (in this case, DataRMSD is an example) 
+
+library(car)
+fligner.test(Values~Method,data=DataRMSD) 
+leveneTest(Values~Method,data=DataRMSD, center="median")
+
+kruskal.test(Values~Method,data=DataRMSD)
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+
+# Post-hoc tests. Change the data frame to the one that needs to be analysed (in this case, DataRMSD is an example) 
+library(dunn.test)
+library(conover.test) 
+dunn_result <- dunn.test(x = DataRMSD$Values, g = DataRMSD$Method, method = "bonferroni")
+dunn_result <- as.data.frame(dunn_result)
+
+resultado_conover_iman <- conover.test(x = DataRMSD$Values, g = DataRMSD$Method, method = "bonferroni", kw = TRUE)
+conover <- as.data.frame(resultado_conover_iman)
+
+
+```
+```{r}
+
+
+```
+
